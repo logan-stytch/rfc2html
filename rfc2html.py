@@ -210,21 +210,21 @@ def markup(text, path=".", script="", extra="", name=None):
         # section x of rfc y markup (unlinked) - mark RFC as processed with special marker
         # Use more restrictive pattern to avoid matching across sentences
         # Pattern for same-line references (don't match newlines)
-        text = re.sub(r"(?i)(section)\s+(\d+(\.\d+)*)([^.]*?)[ \t](of|in)[ \t]+(%s[- ]?)(\d+)" % n,
+        text = re.sub(r"(?i)(section)\s+(\d+(\.\d+)*)([^.\n]*?)[ \t](of|in)[ \t]+(%s[- ]?)(\d+)" % n,
             r'<a href="%s?%s%s=\g<7>#section-\g<2>">\g<1>&nbsp;\g<2>\g<4> \g<5> \g<6>%s\g<7>%s</a>' % (script, extra, n, CROSSREF_START_TAG, CROSSREF_END_TAG), text)
         # Pattern for when "of/in RFC" spans lines (preserve the newline)
-        text = re.sub(r"(?i)(section)\s+(\d+(\.\d+)*)([^.]*?)[ \t](of|in)\n([ \t]+)(%s[- ]?)(\d+)" % n,
+        text = re.sub(r"(?i)(section)\s+(\d+(\.\d+)*)([^.\n]*?)[ \t](of|in)\n([ \t]+)(%s[- ]?)(\d+)" % n,
             r'<a href="%s?%s%s=\g<8>#section-\g<2>">\g<1>&nbsp;\g<2>\g<4> \g<5>\n\g<6>\g<7>%s\g<8>%s</a>' % (script, extra, n, CROSSREF_START_TAG, CROSSREF_END_TAG), text)
-        text = re.sub(r"(?i)(section)\n(\s+)(\d+(\.\d+)*)([^.]*?)\s(of|in)\s+(%s[- ]?)(\d+)" % n,
+        text = re.sub(r"(?i)(section)\n(\s+)(\d+(\.\d+)*)([^.\n]*?)\s(of|in)\s+(%s[- ]?)(\d+)" % n,
             r'<a href="%s?%s%s=\g<8>#section-\g<3>">\g<1></a>\n\g<2><a href="%s?%s%s=\g<8>#section-\g<3>">\g<3>\g<5> \g<6> \g<7>%s\g<8>%s</a>' % (script, extra, n, script, extra, n, CROSSREF_START_TAG, CROSSREF_END_TAG), text)
         # appendix x of rfc y markup (unlinked)
         # Pattern for same-line references (don't match newlines)
-        text = re.sub(r"(?i)(appendix)\s+([A-Z](\.\d+)*)([^.]*?)[ \t](of|in)[ \t]+(%s[- ]?)(\d+)" % n,
+        text = re.sub(r"(?i)(appendix)\s+([A-Z](\.\d+)*)([^.\n]*?)[ \t](of|in)[ \t]+(%s[- ]?)(\d+)" % n,
             r'<a href="%s?%s%s=\g<7>#appendix-\g<2>">\g<1>&nbsp;\g<2>\g<4> \g<5> \g<6>%s\g<7>%s</a>' % (script, extra, n, CROSSREF_START_TAG, CROSSREF_END_TAG), text)
         # Pattern for when "of/in RFC" spans lines (preserve the newline)
-        text = re.sub(r"(?i)(appendix)\s+([A-Z](\.\d+)*)([^.]*?)[ \t](of|in)\n([ \t]+)(%s[- ]?)(\d+)" % n,
+        text = re.sub(r"(?i)(appendix)\s+([A-Z](\.\d+)*)([^.\n]*?)[ \t](of|in)\n([ \t]+)(%s[- ]?)(\d+)" % n,
             r'<a href="%s?%s%s=\g<8>#appendix-\g<2>">\g<1>&nbsp;\g<2>\g<4> \g<5>\n\g<6>\g<7>%s\g<8>%s</a>' % (script, extra, n, CROSSREF_START_TAG, CROSSREF_END_TAG), text)
-        text = re.sub(r"(?i)(appendix)\n(\s+)([A-Z](\.\d+)*)([^.]*?)\s(of|in)\s+(%s[- ]?)(\d+)" % n,
+        text = re.sub(r"(?i)(appendix)\n(\s+)([A-Z](\.\d+)*)([^.\n]*?)\s(of|in)\s+(%s[- ]?)(\d+)" % n,
             r'<a href="%s?%s%s=\g<8>#appendix-\g<3>">\g<1></a>\n\g<2><a href="%s?%s%s=\g<8>#appendix-\g<3>">\g<3>\g<5> \g<6> \g<7>%s\g<8>%s</a>' % (script, extra, n, script, extra, n, CROSSREF_START_TAG, CROSSREF_END_TAG), text)
 
     # rfc markup
